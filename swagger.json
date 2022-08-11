@@ -9,7 +9,7 @@
     "/login": {
       "post": {
         "security": [{ "JWT": [] }],
-        "tags": ["Users"],
+        "tags": ["Login"],
         "description": "Login to Systems",
         "summary": "Login to Systems",
         "requestBody": {
@@ -18,7 +18,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "email":{
+                  "email": {
                     "type": "string"
                   },
                   "password": {
@@ -713,12 +713,12 @@
         }
       }
     },
-    "/categories/results": {
+    "/category": {
       "get": {
         "security": [{ "JWT": [] }],
-        "tags": ["Categories"],
-        "description": "list all categories",
-        "summary": "list all categories",
+        "tags": ["Category"],
+        "description": "list all category",
+        "summary": "list all category",
         "parameters": [
           {
             "required": false,
@@ -749,7 +749,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success get all categories",
+            "description": "Success get all category",
             "content": {
               "application/json": {
                 "schema": {
@@ -773,7 +773,7 @@
       },
       "post": {
         "security": [{ "JWT": [] }],
-        "tags": ["Categories"],
+        "tags": ["Category"],
         "description": "create new category",
         "summary": "create new category",
         "requestBody": {
@@ -811,10 +811,10 @@
         }
       }
     },
-    "/categories/{id}": {
+    "/category/{id}": {
       "get": {
         "security": [{ "JWT": [] }],
-        "tags": ["Categories"],
+        "tags": ["Category"],
         "description": "get category by id",
         "summary": "get category by id",
         "parameters": [
@@ -858,7 +858,7 @@
       },
       "put": {
         "security": [{ "JWT": [] }],
-        "tags": ["Categories"],
+        "tags": ["Category"],
         "description": "update category by id",
         "summary": "update category by id",
         "parameters": [
@@ -912,7 +912,7 @@
       },
       "delete": {
         "security": [{ "JWT": [] }],
-        "tags": ["Categories"],
+        "tags": ["Category"],
         "description": "delete category by id",
         "summary": "delete category by id",
         "parameters": [
@@ -949,15 +949,43 @@
         }
       }
     },
-    "/transaction": {
+    "/product": {
       "get": {
         "security": [{ "JWT": [] }],
-        "tags": ["Transaction"],
-        "description": "list all transaction",
-        "summary": "list all transaction",
+        "tags": ["Product"],
+        "description": "list all product",
+        "summary": "list all product",
+        "parameters": [
+          {
+            "required": false,
+            "name": "name",
+            "in": "query",
+            "description": "Product Name",
+            "schema": {
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "required": false,
+            "name": "page",
+            "in": "query",
+            "description": "Product Page",
+            "schema": {
+              "properties": {
+                "page": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Success get all transaction",
+            "description": "Success get all product",
             "content": {
               "application/json": {
                 "schema": {
@@ -969,7 +997,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/Transaction"
+                        "$ref": "#/components/schemas/Product"
                       }
                     }
                   }
@@ -981,22 +1009,22 @@
       },
       "post": {
         "security": [{ "JWT": [] }],
-        "tags": ["Transaction"],
-        "description": "create new transaction",
-        "summary": "create new transaction",
+        "tags": ["Product"],
+        "description": "create new product",
+        "summary": "create new product",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "$ref": "#/components/schemas/CreateOrUpdateTransaction"
+                "$ref": "#/components/schemas/CreateOrUpdateProduct"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Success Create Transaction",
+            "description": "Success Create Product",
             "content": {
               "application/json": {
                 "schema": {
@@ -1008,7 +1036,7 @@
                     "data": {
                       "type": "object",
                       "items": {
-                        "$ref": "#/components/schemas/Transaction"
+                        "$ref": "#/components/schemas/Product"
                       }
                     }
                   }
@@ -1019,18 +1047,18 @@
         }
       }
     },
-    "/transaction/{id}": {
+    "/product/{id}": {
       "get": {
         "security": [{ "JWT": [] }],
-        "tags": ["Transaction"],
-        "description": "get transaction by id",
-        "summary": "get transaction by id",
+        "tags": ["Product"],
+        "description": "get product by id",
+        "summary": "get product by id",
         "parameters": [
           {
             "required": true,
             "name": "id",
             "in": "path",
-            "description": "transaction id",
+            "description": "product id",
             "schema": {
               "properties": {
                 "id": {
@@ -1042,7 +1070,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success get transaction",
+            "description": "Success get product",
             "content": {
               "application/json": {
                 "schema": {
@@ -1054,7 +1082,7 @@
                     "data": {
                       "type": "object",
                       "items": {
-                        "$ref": "#/components/schemas/Transaction"
+                        "$ref": "#/components/schemas/Product"
                       }
                     }
                   }
@@ -1066,15 +1094,15 @@
       },
       "put": {
         "security": [{ "JWT": [] }],
-        "tags": ["Transaction"],
-        "description": "update transaction by id",
-        "summary": "update transaction by id",
+        "tags": ["Product"],
+        "description": "update product by id",
+        "summary": "update product by id",
         "parameters": [
           {
             "required": true,
             "name": "id",
             "in": "path",
-            "description": "transaction id",
+            "description": "product id",
             "schema": {
               "properties": {
                 "id": {
@@ -1089,14 +1117,14 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "$ref": "#/components/schemas/CreateOrUpdateTransaction"
+                "$ref": "#/components/schemas/CreateOrUpdateProduct"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Success get transaction",
+            "description": "Success get product",
             "content": {
               "application/json": {
                 "schema": {
@@ -1108,7 +1136,7 @@
                     "data": {
                       "type": "object",
                       "items": {
-                        "$ref": "#/components/schemas/Transaction"
+                        "$ref": "#/components/schemas/Product"
                       }
                     }
                   }
@@ -1120,15 +1148,15 @@
       },
       "delete": {
         "security": [{ "JWT": [] }],
-        "tags": ["Transaction"],
-        "description": "delete transaction by id",
-        "summary": "delete transaction by id",
+        "tags": ["Product"],
+        "description": "delete product by id",
+        "summary": "delete product by id",
         "parameters": [
           {
             "required": true,
             "name": "id",
             "in": "path",
-            "description": "transaction id",
+            "description": "product id",
             "schema": {
               "properties": {
                 "id": {
@@ -1140,7 +1168,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success delete transaction",
+            "description": "Success delete product",
             "content": {
               "application/json": {
                 "schema": {
@@ -1364,6 +1392,349 @@
           }
         }
       }
+    },
+    "/outlet-product": {
+      "post": {
+        "security": [{ "JWT": [] }],
+        "tags": ["Oultet Product"],
+        "description": "create new oulet product",
+        "summary": "create new oulet product",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/CreateOrUpdateOutletProduct"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Create OutletProduct",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "items": {
+                        "$ref": "#/components/schemas/OutletProduct"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/outlet-product/{id}": {
+      "put": {
+        "security": [{ "JWT": [] }],
+        "tags": ["Oultet Product"],
+        "description": "update oulet product by id",
+        "summary": "update oulet product by id",
+        "parameters": [
+          {
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "product id",
+            "schema": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/CreateOrUpdateOutletProduct"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success get oulet product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "items": {
+                        "$ref": "#/components/schemas/OutletProduct"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [{ "JWT": [] }],
+        "tags": ["Oultet Product"],
+        "description": "delete oulet product by id",
+        "summary": "delete oulet product by id",
+        "parameters": [
+          {
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "product id",
+            "schema": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success delete oulet product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transaction": {
+      "get": {
+        "security": [{ "JWT": [] }],
+        "tags": ["Transaction"],
+        "description": "list all transaction",
+        "summary": "list all transaction",
+        "responses": {
+          "200": {
+            "description": "Success get all transaction",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Transaction"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [{ "JWT": [] }],
+        "tags": ["Transaction"],
+        "description": "create new transaction",
+        "summary": "create new transaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/CreateOrUpdateTransaction"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Create Transaction",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "items": {
+                        "$ref": "#/components/schemas/Transaction"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transaction/{id}": {
+      "get": {
+        "security": [{ "JWT": [] }],
+        "tags": ["Transaction"],
+        "description": "get transaction by id",
+        "summary": "get transaction by id",
+        "parameters": [
+          {
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "transaction id",
+            "schema": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success get transaction",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "items": {
+                        "$ref": "#/components/schemas/Transaction"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "security": [{ "JWT": [] }],
+        "tags": ["Transaction"],
+        "description": "update transaction by id",
+        "summary": "update transaction by id",
+        "parameters": [
+          {
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "transaction id",
+            "schema": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/CreateOrUpdateTransaction"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success get transaction",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "items": {
+                        "$ref": "#/components/schemas/Transaction"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [{ "JWT": [] }],
+        "tags": ["Transaction"],
+        "description": "delete transaction by id",
+        "summary": "delete transaction by id",
+        "parameters": [
+          {
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "transaction id",
+            "schema": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success delete transaction",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1478,6 +1849,43 @@
           }
         }
       },
+      "CreateOrUpdateProduct": {
+        "type": "object",
+        "items": {
+          "type": "object"
+        },
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "sku": {
+            "type": "string"
+          },
+          "category_id": {
+            "type": "string"
+          }
+        }
+      },
+      "Product": {
+        "type": "object",
+        "items": {
+          "type": "object"
+        },
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "sku": {
+            "type": "string"
+          },
+          "category_id": {
+            "type": "string"
+          }
+        }
+      },
       "CreateOrUpdateOutlet": {
         "type": "object",
         "items": {
@@ -1512,6 +1920,49 @@
           },
           "address": {
             "type": "string"
+          }
+        }
+      },
+      "CreateOrUpdateOutletProduct": {
+        "type": "object",
+        "items": {
+          "type": "object"
+        },
+        "properties": {
+          "outlet_id": {
+            "type": "string"
+          },
+          "product_id": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "stock": {
+            "type": "number"
+          }
+        }
+      },
+      "OutletProduct": {
+        "type": "object",
+        "items": {
+          "type": "object"
+        },
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "outlet_id": {
+            "type": "string"
+          },
+          "product_id": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "stock": {
+            "type": "number"
           }
         }
       }
